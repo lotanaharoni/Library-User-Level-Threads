@@ -20,7 +20,8 @@ This library is written in C++
 
 ## Introduction
 
-The library implements Round-Robin scheduling alghorithm. Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
+The library implements Round-Robin scheduling alghorithm.<br>
+Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
 
 ### Benefits
 
