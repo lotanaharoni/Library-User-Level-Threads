@@ -16,11 +16,11 @@
 
 ## Language
 
-This library is written in C++.
+This library is written in C++
 
 ## Introduction
 
-Use all k8s features to deploy and expose images during tests :heavy_check_mark:
+The library implements Round-Robin scheduling alghorithm. Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
 
 ### Benefits
 
@@ -171,4 +171,4 @@ PRs about Api/ speed improvement are welcome.
 ### Internal Tools
 
 - 'signal.h'
-- sys/time.h
+- 'sys/time.h'
