@@ -14,24 +14,27 @@
 
 ## Language
 
-This static library is written in C++
+This static library is written in C++.
+<br>
 
 ## Introduction
 
 This is a static library, that creates and manages user-level threads.<br>
 The library implements Round-Robin scheduling alghorithm.<br>
 Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
+<br>
 
 ### Benefits
 
 - The user can create, block, resume and terminate threads.
 - The library supports different threads with different priorities, high priority threads will<br>
   get more time in the CPU when their turn arrive.
+<br>
 
 ## Setup
 
 Include the 'uthreads.h' header
-
+<br>
 
 ## Library functions
 
@@ -62,11 +65,12 @@ await subscribe({
   ) => Promise<unknown>
 })
 ```
+<br>
 
 ## Supported OS
 
 I'm developing on linux and macOS, and the library was tested on linux.
-
+<br>
 
 ## Internal tools
 
