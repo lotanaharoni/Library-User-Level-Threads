@@ -70,12 +70,10 @@ int uthread_resume(int tid)
  */
 
 ```
-<br>
 
 ## Supported OS
 
 I'm developing on linux and macOS, and the library was tested on linux.
-<br>
 
 ## Internal tools
 
