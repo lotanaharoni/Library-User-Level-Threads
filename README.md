@@ -8,8 +8,7 @@
 3. [Setup](#setup)
 4. [Library functions](#Library-functions)
 5. [Supported OS](#supported-os)
-6. [Run your tests in CI](#Run-your-tests-in-CI)
-7. [Internal tools](#Internal-tools)
+6. [Internal tools](#Internal-tools)
 
 ---
 
@@ -63,18 +62,6 @@ await subscribe({
   ) => Promise<unknown>
 })
 ```
-
-## Run your tests in CI
-
-```yaml
-- name: install k8s
-  uses: engineerd/setup-kind@v0.4.0
-- run: yarn run your-tests
-```
-
-Thats it.
-
-- I have a more advanced setup to test docker-images of other sub-packages of this repository.
 
 ## Supported OS
 
