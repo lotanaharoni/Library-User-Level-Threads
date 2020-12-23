@@ -29,7 +29,6 @@ Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
 - The user can create, block, resume and terminate threads.
 - The library supports different threads with different priorities, high priority threads will<br>
   get more time in the CPU when their turn arrive.
-<br>
 
 ## Setup
 
