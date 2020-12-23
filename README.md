@@ -1,103 +1,41 @@
-<h1 align="center"> Library User-Level Threads</h1>
-<p align="center">Include the library and use it according to the package's public interface</p>
+<h1> Library User-Level Threads</h1>
+<p>Include the library and use it according to the package's public interface</p>
 
 ## Table of Contents
 
 1. [Language](#Language)
 2. [Introduction](#introduction)
 3. [Setup](#setup)
-4. [Api](#api)
+4. [Library functions](#Library functions)
 5. [Supported OS](#supported-os)
 6. [Run your tests in CI](#Run-your-tests-in-CI)
 7. [Questions & Debugging & Advanced Operations](#Questions-&-Debugging-&-Advanced-Operations)
-8. [Development & contributing](#Development-&-contributing)
+8. [Internal tools](#Internal tools)
 
 ---
 
 ## Language
 
-This library is written in C++
+This static library is written in C++
 
 ## Introduction
 
+This is a static library, that creates and manages user-level threads.<br>
 The library implements Round-Robin scheduling alghorithm.<br>
 Each thread can be in one of the following states: RUNNING, BLOCKED and READY.
 
 ### Benefits
 
-- Faster tests - deploying an image is slow. k8test deployments added a scope property to the game:
-  - a single deployment at most in a namespace (cluster),
-  - in the next test run, there will be new deployment
-  - each subscription will create new deployment
-- [wip] Monitoring tests resources - you can safely stop/cancel/shutdown the tests when/how ever you want and eventually all the resources will be deleted.
-- There is no need to learn k8s. There are very good defaults.
+- The user can create, block, resume and terminate threads.
+- The library supports different threads with different priorities, high priority threads will<br>
+  get more time in the CPU when their turn arrive.
 
 ## Setup
 
-Fast setup to deploy redis in your tests:
+Include the 'uthreads.h' header
 
-```json
-{
-  "name": "your-project",
-  "scripts": {
-    "pretest": "k8test start-monitoring",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "k8test": "^1.0.0"
-  }
-}
-```
 
-- note: `k8test start-monitoring` - after the first run, it will take up to 1-2 seconds
-
-```javascript
-// jest.config.js
-const k8test = require('k8test')
-
-module.exports = {
-  globals: {
-    // to differentiate k8s resources between different runs
-    APP_ID: k8test.randomAppId(),
-  },
-})
-```
-
-```typescript
-// __tests__/test.spec.ts
-
-import Redis from 'ioredis'
-import { Subscription } from 'k8test'
-import { subscribe } from './utils'
-import { subscribe, Subscribe } from 'k8test'
-
-describe('simple use-case', () => {
-  let exposedRedisInfo: Subscription
-
-  beforeEach(async () => {
-    exposedRedisInfo = await subscribe({
-      imageName: 'redis',
-      imagePort: 6379,
-    })
-  })
-
-  afterEach(async () => {
-    await exposedRedisInfo.unsubscribe() // redis will not be reachable after this line
-  })
-
-  test('ensure redis is alive', async () => {
-    const redis = new Redis({
-      host: exposedRedisInfo.deployedImageIp,
-      port: exposedRedisInfo.deployedImagePort,
-      connectTimeout: 1000,
-    })
-    await expect(redis.ping()).resolves.toEqual('PONG')
-    redis.disconnect()
-  })
-})
-```
-
-## Api
+## Library functions
 
 ```typescript
 import { subscribe } from 'k8test'
@@ -141,7 +79,7 @@ Thats it.
 
 ## Supported OS
 
-I'm developing on macOS Mojave and in CI we are running on linux debian
+I'm developing on linux and macOS, and the library was tested on linux.
 
 ## Questions & Debugging & Advanced Operations
 
@@ -155,21 +93,9 @@ yarn k8test delete-k8test-resources
 
 work in progress. hold on. for now, you can manually search the container you need to attach to using kubectl cli, the app-id and namespace (which is k8test).
 
-## Development & contributing
+## Internal tools
 
-Run the following command in the root folder of the repository
 
-```bash
-yarn install && yarn build && yarn build:dockers
-```
-
-this library is in a early stage but it is functional. I don't have a draft for a better api to the end-users. Feel free to drastically change the api.
-
-Keep in mind that tests are the first priority. production code can use this library but it has a lower level of priority.
-
-PRs about Api/ speed improvement are welcome.
-
-### Internal Tools
-
-- 'signal.h'
-- 'sys/time.h'
+- The library used system calls like 'sigsetjmp', 'siglongjmp' and 'sigprocmask'
+- The following headers are included in the library: 'signal.h' and 'sys/time.h'
+    
