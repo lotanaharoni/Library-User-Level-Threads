@@ -6,11 +6,10 @@
 1. [Language](#Language)
 2. [Introduction](#introduction)
 3. [Setup](#setup)
-4. [Library functions](#Library functions)
+4. [Library functions](#Library-functions)
 5. [Supported OS](#supported-os)
 6. [Run your tests in CI](#Run-your-tests-in-CI)
-7. [Questions & Debugging & Advanced Operations](#Questions-&-Debugging-&-Advanced-Operations)
-8. [Internal tools](#Internal tools)
+7. [Internal tools](#Internal-tools)
 
 ---
 
@@ -81,17 +80,6 @@ Thats it.
 
 I'm developing on linux and macOS, and the library was tested on linux.
 
-## Questions & Debugging & Advanced Operations
-
-> How do I manually remove all the tests and k8test resources from my k8s cluster?
-
-```bash
-yarn k8test delete-k8test-resources
-```
-
-> How do I listen to stdout & stderr of a specific image?
-
-work in progress. hold on. for now, you can manually search the container you need to attach to using kubectl cli, the app-id and namespace (which is k8test).
 
 ## Internal tools
 
