@@ -39,31 +39,36 @@ Include the 'uthreads.h' header
 ## Library functions
 
 ```typescript
-import { subscribe } from 'k8test'
-import * as k8s from '@kubernetes/client-node' // you don't need to install it
+int uthread_init(int *quantum_usecs, int size)
+/**
+ * This function initializes the thread library.
+ */
 
-export enum SingletonStrategy {
-  manyInAppId = 'many-in-app-id',
-  oneInNamespace = 'one-in-namespace',
-  oneInAppId = 'one-in-app-id',
-}
+int uthread_spawn(void (*f)(void), int priority)
+/**
+ * This function creates a new thread, whose entry point is the function f with the signature void f(void).
+ */
 
-export type ContainerOptions = Omit<k8s.V1Container, 'name' | 'image' | 'ports'>
+int uthread_change_priority(int tid, int priority)
+/**
+ * This function initializes the thread library.
+ */
 
-await subscribe({
-  imageName: string
-  postfix?: string
-  appId?: string
-  singletonStrategy?: SingletonStrategy
-  imagePort: number
-  containerOptions?: ContainerOptions  // for mounting and any other options
-  namespaceName?: string
-  isReadyPredicate?: (
-    deployedImageUrl: string,
-    deployedImageIp: string,
-    deployedImagePort: number,
-  ) => Promise<unknown>
-})
+int uthread_terminate(int tid)
+/**
+ * This function changes the priority of the thread with ID tid.
+ */
+
+int uthread_block(int tid)
+/**
+ *  This function blocks the thread with ID tid.
+ */
+
+int uthread_resume(int tid)
+/**
+ * This function resumes a blocked thread with ID tid.
+ */
+
 ```
 <br>
 
