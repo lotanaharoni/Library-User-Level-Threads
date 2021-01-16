@@ -6,8 +6,7 @@
 #define JB_SP 6
 #define JB_PC 7
 
-/* A translation is required when using an address of a variable.
-   Use this as a black box in your code. */
+/* A translation is required when using an address of a variable. */
 address_t translate_address(address_t addr)
 {
 	address_t ret;
@@ -24,8 +23,7 @@ address_t translate_address(address_t addr)
 #define JB_SP 4
 #define JB_PC 5
 
-/* A translation is required when using an address of a variable.
-   Use this as a black box in your code. */
+/* A translation is required when using an address of a variable. */
 address_t translate_address(address_t addr)
 {
 	address_t ret;
