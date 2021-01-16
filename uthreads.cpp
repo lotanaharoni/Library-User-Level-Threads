@@ -44,8 +44,7 @@ void remove_thread_from_queue(int tid){
 }
 
 /**
- * This function exits the program. makes sure
- * all the allocated memory is free.
+ * This function exits the program.
  * @param _exit the of exit code
  */
 void exit_library (int _exit)
@@ -65,8 +64,7 @@ void exit_library (int _exit)
 
 
 /**
- * This function creates a new thread and
- * assign to it the next valid free id
+ * This function creates a new thread.
  * @param f - the function this new thread is to operate
  * @param priority - the priority of the new thread.
  * @return - the id of the created thread.
@@ -76,7 +74,7 @@ int create_thread(void (*f)(), int priority){
 	for(unsigned long i=0; i < thread_pool.size(); i++)
 	{
 
-		/*searching for a terminated thread to replace*/
+		/* Searching for a terminated thread to replace*/
 		if (thread_pool[i]->get_terminated())
 		{
 			Thread* temp = thread_pool[i];
@@ -96,7 +94,7 @@ int create_thread(void (*f)(), int priority){
 		}
 	}
 
-	/*checking if the thread pool is full*/
+	/* Checking if the thread pool is full*/
 	if (thread_pool.size() == MAX_THREAD_NUM)
 	{
 		return -1;
@@ -135,7 +133,7 @@ void replace_running_thread(int sig){
 		running_thread->set_state(RUNNING);
 		counter++;
 
-		/*setting new timer*/
+		/*setting a new timer*/
 		if (setitimer (ITIMER_VIRTUAL, &timer, nullptr)) {
 			sigprocmask(SIG_UNBLOCK, &set, nullptr);
 			exit_library(1);
@@ -164,7 +162,7 @@ void replace_running_thread(int sig){
 		return;
 	}
 
-	/*setting new timer*/
+	/*setting a new timer*/
 	timer.it_value.tv_sec = quantums[running_thread->get_priority()] / MICRO_SEC;
 	timer.it_value.tv_usec = quantums[running_thread->get_priority()] % MICRO_SEC;
 	if (setitimer (ITIMER_VIRTUAL, &timer, nullptr)) {
@@ -172,7 +170,7 @@ void replace_running_thread(int sig){
 		exit_library(1);
 	}
 
-	/*loading new thread*/
+	/*loading a new thread*/
 	siglongjmp(running_thread->get_env(),1);
 }
 
@@ -192,7 +190,7 @@ int uthread_init(int *quantum_usecs, int size){
 		}
 	}
 
-	/*deep copy for array*/
+	/*Deep copy for array*/
 	quantums_size = size;
 	quantums = new int [quantums_size];
 	for (int i=0; i < size; i++)
